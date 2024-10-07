@@ -1,4 +1,5 @@
 let orbs = [];
+let players = [];
 
 let windowHeight = window.innerHeight;
 let windowWidth = window.innerWidth;

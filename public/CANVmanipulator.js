@@ -1,21 +1,30 @@
-player.locX = Math.floor(500 * Math.random() + 10);
-player.locY = Math.floor(500 * Math.random() + 10);
-
 const draw = () => {
   const camX = -player.locX + canvas.width / 2;
-  const camY = -player.locY + canvas.height;
+  const camY = -player.locY + canvas.height / 2;
 
   context.setTransform(1, 0, 0, 1, 0, 0);
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.translate(camX, camY);
 
-  context.beginPath();
-  context.fillStyle = "rgb(0,255,0)";
-  context.arc(player.locX, player.locY, 10, 0, Math.PI * 2);
-  context.fill();
-  context.lineWidth = 3;
-  context.strokeStyle = "rgb(100,55,0)";
-  context.stroke();
+  players.forEach((p) => {
+    if (!p.playerData) {
+      return;
+    }
+
+    context.beginPath();
+    context.fillStyle = p.playerData.color;
+    context.arc(
+      p.playerData.locX,
+      p.playerData.locY,
+      p.playerData.radius,
+      0,
+      Math.PI * 2
+    );
+    context.fill();
+    context.lineWidth = 3;
+    context.strokeStyle = "rgb(100,55,0)";
+    context.stroke();
+  });
 
   orbs.forEach((orb) => {
     context.beginPath();
@@ -28,7 +37,6 @@ const draw = () => {
 };
 
 canvas.addEventListener("mousemove", (event) => {
-  console.log(event);
   const mousePosition = {
     x: event.clientX,
     y: event.clientY,
@@ -54,16 +62,6 @@ canvas.addEventListener("mousemove", (event) => {
     yVector = 1 - (angleDeg + 90) / 90;
   }
 
-  speed = 10;
-  xV = xVector;
-  yV = yVector;
-
-  if ((player.locX < 5 && xV < 0) || (player.locX > 500 && xV > 0)) {
-    player.locY -= speed * yV;
-  } else if ((player.locY < 5 && yV > 0) || (player.locY > 500 && yV < 0)) {
-    player.locX += speed * xV;
-  } else {
-    player.locX += speed * xV;
-    player.locY -= speed * yV;
-  }
+  player.xVector = xVector || 0.1;
+  player.yVector = yVector || 0.1;
 });
