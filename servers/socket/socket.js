@@ -8,6 +8,7 @@ const Orb = require("../../classes/Orb");
 //--------------------------------------
 
 const currentOrbs = [];
+const players = [];
 
 const settings = {
   defaultOrbsNumber: 500,
@@ -24,9 +25,9 @@ initGame();
 io.on("connect", (socket) => {
   socket.on("init", (playerObject, ackCallBack) => {
     const playerConfig = new PlayerConfiguration(settings);
-    const playerData = new PlayerData("Abd El-Rahman", settings);
+    const playerData = new PlayerData(playerObject.name, settings);
     const player = new Player(socket.id, playerConfig, playerData);
-
+    players.push(player);
     ackCallBack(currentOrbs);
   });
 });
