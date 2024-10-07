@@ -8,7 +8,7 @@ const server = app.listen(3000);
 
 const io = socketio(server);
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join( __dirname, "../public")));
 
 exports.app = app;
 exports.io = io;
