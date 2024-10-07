@@ -1,0 +1,18 @@
+module.exports = class PlayerData {
+  constructor(playerName, settings) {
+    this.name = playerName;
+    this.locX = Math.floor(500 * Math.random() + 10);
+    this.locY = Math.floor(500 * Math.random() + 10);
+    this.radius = settings.defaultSize;
+    this.score = 0;
+    this.absorbedOrbs = 0;
+    this.color = this.getRandomColor();
+  }
+  getRandomColor() {
+    const r = Math.floor(Math.random() * 200 + 50);
+    const g = Math.floor(Math.random() * 200 + 50);
+    const b = Math.floor(Math.random() * 200 + 50);
+
+    return `rgb(${r},${g},${b})`;
+  }
+};

@@ -1,11 +1,6 @@
 player.locX = Math.floor(500 * Math.random() + 10);
 player.locY = Math.floor(500 * Math.random() + 10);
 
-const init = () => {
-  console.log(orbs);
-  draw();
-};
-
 const draw = () => {
   const camX = -player.locX + canvas.width / 2;
   const camY = -player.locY + canvas.height;
