@@ -1,3 +1,5 @@
+let orbs = [];
+
 let windowHeight = window.innerHeight;
 let windowWidth = window.innerWidth;
 
